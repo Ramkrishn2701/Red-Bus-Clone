@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Page</h1>
+    <h1>{{note}}</h1>
+    <form action="{% url 'edit' trip.id  %}" method="POST">
+        
+        {{form}}
+        <input type="submit">
+    </form>
+</body>
+</html> -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {% if msg %}
+    
+    <title>Changed</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/green-tick.png' %}">
+    {% else %}
+    <title>Edit Trip</title>
+    
+    <link rel="icon" type="image/x-icon" href="{% static 'images/change.png' %}">
+    {% endif %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,500;1,300&family=Poppins:wght@500&family=Raleway:wght@300&family=Roboto+Slab:wght@300&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <title>Edit Trip</title>
+</head>
+<body style="font-family: Poppins;">
+    
+
+      <nav class="navbar navbar-dark bg-danger">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand  text-light" href="#">Red Bus</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link text-light" href="{% url 'home' %}">Home </a>
+                </li>
+               
+               
+              </ul>
+            </div>
+          </nav>
+      </nav>
+    <form class="row g-3 pt-5" action="{% url 'edit' trip.id  %}" method="POST">
+        {% csrf_token %}
+        <div class="col-md-4">
+          <label for="validationServer01" class="form-label">From</label>
+          {{form.from_location}}
+          
+         
+        </div>
+        <div class="col-md-4">
+          <label for="validationServer02" class="form-label">To</label>
+          {{form.to_location}}
+          
+          
+        </div>
+        <div class="col-md-4">
+          <label for="validationServer02" class="form-label">Date</label>
+          {{form.date}}
+          
+        </div>
+       
+        <div class="col-12 px-5">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+      <h1 class="px-5">{{note}}</h1>
+      
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

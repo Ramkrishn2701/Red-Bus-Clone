@@ -1,0 +1,67 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{background-image: url('images/sign-bg.jpg');
+    background-repeat: no-repeat;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-size:cover ;
+    
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly ;
+    align-items: center;
+    max-width: 60%;
+    height: 700px;
+    margin-left: 20%;
+    background-color: rgba(255, 255, 255,0.5);
+    
+    backdrop-filter: blur(8px);
+    border-radius: 25px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    padding: 20px;
+    
+  
+
+}
+.label{
+    height: 700px;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+.labels,.inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.label input{
+    border: none;
+    
+    outline: none;
+    height: 30px;
+    background-color: rgba(255, 255, 255,0.5);
+    
+    
+    
+}
+.label input:focus{
+    border-bottom: 1px solid black;
+}
+
+.button:hover a{
+        
+    color: #5F0C11;
+}
+.button:hover{
+background-color: white;
+}
+a{
+text-decoration: none;
+color: white;
+}

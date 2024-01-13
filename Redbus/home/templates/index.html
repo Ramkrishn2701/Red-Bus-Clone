@@ -1,0 +1,363 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../favicon.ico?root=rbus" rel="shortcut icon">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/rb_vertical.svg' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <script src="{% static 'script.js' %}" defer></script>
+    <title>Redbus</title>
+</head>
+<body>
+    <!-- navbar-sections -->
+    <div class="navbar">
+        <div class="nav-1">             <!--nav-1 -->
+            <div class="navbar-logo"><img src="{% static 'images/b_logo.png' %}" alt=""></div>
+            <div class="navbar-vertical"><div class="vertical"></div></div>
+                                        <!-- nav-options -->
+            <div class="nav-options">
+                <img src="{% static 'images/rb_vertical.svg' %}" alt="">
+                <p>Bus Tickets</p>
+            </div>
+            <div class="nav-options">
+                <img src="{% static 'images/ryde_vertical.svg' %}" alt="">
+                <p>Car Rentals</p>
+            </div>
+            <div class="nav-options"> 
+                <img src="{% static 'images/rail_vertical.svg' %}" alt="">
+                <p>Train Tickets</p>
+            </div>
+            
+        </div>   
+        <div class="nav-2">             <!-- nav-2 -->
+            <div class="nav-2-options">
+                <img src="{% static 'images/support_agent_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                <p>Help</p>
+            </div>
+            {% if user.is_authenticated %}    
+            <div class="nav-2-options"> 
+                <img src="{% static 'images/icons8-trip-20.png' %}" alt="">
+                <div class="dropdown">
+                <p>Trips</p>
+                <div class="dropdown-content">
+                    
+                    <a href="{% url 'tickets' %}">Show my Ticket</a>
+                    
+                    
+                </div>
+                </div>
+                
+            </div>        
+            <div class="nav-2-options">
+                
+                <p>Hi, {{user.first_name}}</p>
+            </div>
+            <div class="nav-2-options">
+                
+                <p><a href="accounts/logout" style="color: black;">Logout</a></p>
+            </div>
+          
+
+          
+            {% else %}
+            
+            <div class="nav-2-options"> 
+                <img src="{% static 'images/account_circle_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
+                <div class="dropdown">
+                <p>Account</p>
+                <div class="dropdown-content">
+                    <a href="accounts/login">Login</a>
+                    <a href="accounts/signup">Sign Up</a>
+                    <!-- <a href="">Profile</a>
+                    <a href="">Settings</a> -->
+                    
+                    
+                </div>
+                </div>
+                
+            </div>
+            {% endif %}
+           
+        </div>
+    </div>
+
+    <!-- Main-content -->
+
+    <div class="main">
+        <h1>India's No.1 Online Bus Ticket Booking Site </h1>
+        
+        <form action="journey" method="POST">
+        
+           
+            {% csrf_token %}
+        <div class="main-input">
+            <div class="sub-input">
+                <span >
+                    <img src="{% static 'images/icons8-get-on-bus-50.png' %}" alt="">
+                    
+                    </span>
+                    <input type="text" placeholder="From" name="from_location">
+
+            </div>
+            <div class="sub-input">
+                <span >
+                    <img src="{% static 'images/icons8-get-off-bus-50.png' %}" alt="">
+                    
+                    </span>
+                    <input type="text" placeholder="To" name="to_location">
+
+            </div>
+            <div class="sub-input date">
+                <!-- <span class="material-symbols-outlined"  >
+                    calendar_month
+                </span> -->
+                <input type="date"  name="date">
+                    
+
+
+            </div>
+            
+            <div class="sub-input submit">
+                {% if user.is_authenticated %}
+                <input  type="submit" value="Book Ticket" style="background-color: #D34C53;z-index:1;cursor:pointer;color:white;font-weight:bold">
+                {% else %}
+                <a href="{% url 'login' %}" value="Search" style="background-color: #D34C53;z-index:1;; cursor:pointer">Search</a>
+                {% endif %}
+            </div>
+           
+            
+        </div>
+    </form>
+    </div>
+    <div class="main-2">
+        <div class="Trending offers">
+            <div class="offer-1">
+                <h2>TRENDING OFFERS</h2>  
+                {% if journey_pk %}
+                <div><h3><a href="{% url 'edit' journey_pk  %}" style="color: blue;">Edit Journey</a></h3></div>
+                
+                {% endif %}
+            </div>
+            <div class="offer-2">
+                <div class="offer-2  box box-1">
+                    <div class="card"><img src="{% static 'images/tile-80X80.png' %}" alt=""></div>
+                    <div class="card-content">
+                        <button class="button-1">BUS</button>
+                        <h4>Save upto Rs 250 on bus tickets</h4>
+                        <h5>Valid till 30 Nov</h5>
+                        <button class="button-2">First</button>
+                    </div>
+                
+                </div>
+                <div class="offer-2 box box-2">
+                    <div class="card"><img src="{% static 'images/SUPERHIT.png' %}" alt=""></div>
+                    <div class="card-content">
+                        <button class="bt-1">Bus</button>
+                        <h4>Save upto Rs 250 on bus tickets</h4>
+                        <h5>Valid till 30 Nov</h5>
+                        <button class="bt-2">First</button>
+                    </div>
+                
+                </div>
+                <div class="offer-2 box box-3">
+                    <div class="card"><img src="{% static 'images/BUS300.png' %}" alt=""></div>
+                    <div class="card-content">
+                        <button class="btn-1">Bus</button>
+                        <h4>Save upto Rs 250 on bus tickets</h4>
+                        <h5>Valid till 30 Nov</h5>
+                        <button class="btn-2">First</button>
+                    </div>
+                
+                </div>
+                
+                
+            </div>
+        </div>
+        <div>
+
+        </div>
+        <div class="main-3">
+            <img src="{% static 'images/eb882edd-8d39-4cf1-8d57-a04f6e64f7c1.png' %}" alt="">
+        </div>
+        <div class="main-4">
+            <div class="main-4-1">
+                <div><h1>NOW <b>, GET MORE THAN <br>JUST BUS </b>TICKETS WITH <br>REDBUS ! </h1>
+            </div>
+                <div class="main-4a">
+                    <div class="sm"><img src="{% static 'images/ryde.svg' %}" alt=""><p>Cab/Bus Rental<p>Train Tickets</p></p></div>
+                    <div class=" line"></div>
+                    <div class="sm"><img src="{% static 'images/redRail.svg' %}" alt=""><p>Train Tickets</p></div>
+                </div>
+                <div><p>Rent Cabs,Tempo Travellers & Buses With Best Drivers</p></div>
+                <div class="main-4b">
+                    <div class="dm"><img src="{% static 'images/ryde_car.svg' %}" alt=""><p>Outstation</p></div>
+                    <div class="dm"><img src="{% static 'images/ryde_car_hourly.svg' %}" alt="">Hourly Rentals</div>
+                    <div class="dm"><img src="{% static 'images/ryde_airport_transport.svg' %}" alt="">Airport Tranfers</div>
+                </div>
+                <div class="main-4c"><a href="">Book Cab/Bus rental</a> <img src="{% static 'images/icons8-right-arrow-32.png' %}" alt=""></div>
+            </div>
+            <div class="main-4-2"><img src="{% static 'images/rydePop.svg' %}" alt=""></div>
+        </div>
+        
+    </div>
+        <!-- main-5 section -->
+    <div class="main-5">
+        <div class="main-51">
+            <h1>ENJOY THE APP!</h1>
+        </div>
+        <div class="main-52">
+            <div class="main-52a">
+                <div>
+                    <div class="cm">
+                        <div class="cm1"><img src="{% static 'images/tick.svg' %}" alt=""><h5>Quick access</h5></div>
+                        <div class="cm1"><img src="{% static 'images/tick.svg' %}" alt=""><h5>Superior Live Tracking</h5></div>
+                    </div>
+                    <div class="flask">
+                        <div class="sasi">
+                            <div class="for"><h5>4.5</h5><img src="{% static 'images/icons8-star-24.png' %}" alt=""><br></div>
+                            <p>50M+ downloads</p>
+                            <h6>Play Store</h6>
+                        </div>
+                        <div class="line"></div>
+                        <div class="sasi">
+                            <div class="for"><h5>4.6</h5><img src="{% static 'images/icons8-star-24.png' %}" alt=""><br></div>
+                            <p>50M+ downloads</p>
+                            <h6>App Store</h6>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+            <div class="scan">
+                <div>
+                    <h4>Scan to Download</h4>
+                </div>
+                <div>
+                    <img src="{% static 'images/qrCode (1).svg' %}" alt="">
+                </div>
+            </div>
+            <div class="download">
+                <div>
+                    <h4>Download the App on</h4>
+                </div>
+                <div><img src="{% static 'images/playStore (1).svg' %}" alt=""></div>
+                <div><img src="{% static 'images/appStore (1).svg' %}" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="primo"><img src="{% static 'images/primoTopBanner.svg' %}" alt=""></div>
+    
+    <!-- main-6 -->
+    <div class="main-6">
+        <div class="main-6a">
+            <div class="img"><img src="{% static 'images/primoSubImg1.svg' %}" alt=""></div>
+            <div class="bull">
+                <div><h3>1 of 5 Buses <br>qualify</h3></div>
+                <div><p>Primo's strict safety qualification ensures a safety travel for yoy</p></div>
+            </div>
+        </div>
+        <div class="main-6a">
+            <div class="img"><img src="{% static 'images/primoSubImg2.svg' %}" alt=""></div>
+            <div class="bull">
+                <div><h3>Preferred by 90%
+                </h3></div>
+                <div><p>90% of travellers re-book Primo buses for its punctuality and comfort</p></div>
+            </div>
+        </div>
+        <div class="main-6a">
+            <div class="img"><img src="{% static 'images/primoSubImg3.svg' %}" alt=""></div>
+            <div class="bull">
+                <div><h3>9 Lac+ monthly travellers</h3></div>
+                <div><p>In 2022, 9 Lac+ people traveled with Primo every month</p></div>
+            </div>
+        </div>
+       
+      
+    </div>
+    <h1 class="part">PARTNERED WITH</h1>
+    <div class="rtc"><h2> 25 RTC's</h2><button><a href="#">View All</a></button></div>
+    <div class= "srtc">
+        <div class="srt"><div><img src="{% static 'images/10283.png' %}" alt=""></div><div>APSRTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/GSRTC.svg' %}" alt=""></div><div>GSRTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/TSRTC.png' %}" alt=""></div><div>MPSRTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/10823.png' %}" alt=""></div><div>Kerala RTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/KERALA-RTC.svg' %}" alt=""></div><div>SBSTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/16426.png' %}" alt=""></div><div>RSRTC</div></div>
+        <div class="srt"><div><img src="{% static 'images/UPSRTC.svg' %}" alt=""></div><div>UPSRTC</div></div>
+    </div>
+    <div class="rtc"><h1>3500+ Private Bus Operators</h1><button><a href="#">View All</a></button></div>
+    <div class="travel">
+        <div class="travels">
+            <div>SRS Travels</div>
+            <div>KPN Travels</div>
+            <div>Rajdhani Express</div>
+            <div>Bengal Tiger</div>
+            <div>Patel Travels</div>
+        </div>
+        <div class="travels">
+            <div>Eagle Travels</div>
+            <div>Sri Krishna Travels</div>
+            <div>Raj Express</div>
+            <div>Evacay Bus</div>
+            <div>Orange Travels</div>
+        </div>
+        <div class="travels">
+            <div>VRL Travels</div>
+            <div>SRM Travels</div>
+            <div>JBT Travels</div>
+            <div>Kanker Roadways</div>
+            <div>Humsafar Travels</div>
+        </div>
+        <div class="travels">
+            <div>Sharma Travels</div>
+            <div>Kallada Travels</div>
+            <div>Parveen Travels</div>
+            <div>Chartered Speed Bus</div>
+            <div>Infant Jesus</div>
+        </div>
+        <div class="travels">
+            <div>Shatabdi Travels</div>
+            <div>Komitla</div>
+            <div>Mahasagar Travels</div>
+            <div>Shrinath Travels</div>
+            <div>Shrinath Travels</div>
+        </div>
+        
+    </div>
+    <!-- <div class="questions">
+        <div><h1>FREQUENTLY ASKED QUESTIONS</h1></div>
+        <div>
+            <div>General</div>
+            <div>Ticket-related</div>
+            <div>Payment</div>
+            <div>Cancellation & Refund</div>
+            <div>Insurance</div>
+        </div>
+        <div>
+            <div>How can I book bus tickets on redBus?</div><div><img src="images/icons8-plus-48.png" alt=""></div>
+            
+        </div>
+    </div> -->
+    
+    <script>
+        function alert(){
+            alert("Login first")
+        }
+    </script>
+    
+    
+</body>
+
+
+  
+
+
+</html>
+
+

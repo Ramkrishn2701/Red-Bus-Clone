@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,500;1,300&family=Poppins:wght@500&family=Raleway:wght@300&family=Roboto+Slab:wght@300&family=Roboto:wght@500&display=swap" rel="stylesheet">
+      
+    <title>Confirm</title>
+</head>
+<body style="font-family: poppins;">
+    <nav class="navbar navbar-dark bg-danger">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand  text-light" href="#">Red Bus</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link text-light" href="{% url 'home' %}">Home </a>
+                </li>
+               
+               
+              </ul>
+            </div>
+          </nav>
+      </nav>
+
+      <!-- tables -->
+      <div>
+      <table class="table table-striped table-bordered" style="width: 50%;margin-left:25%;margin-top:5%">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+
+            <td>{{user.first_name}}</td>
+            <td>{{j.from_location}}</td>
+            <td>{{j.to_location}}</td>
+            <td>{{j.date}}</td>
+
+            
+            {% if journey_pk %}
+            
+            <td><a class="btn btn-primary" href="{% url 'edit' journey_pk  %}">Edit</a></td>
+            <td><a class="btn btn-primary" href="{% url 'delete' journey_pk %}">Delete</a></td>
+            {% else %}
+            <td><a class="btn btn-primary" href="{% url 'confirm' f  %}">Confirm</a></td>
+            {% endif %}
+            
+            
+            
+          </tr>
+         
+        </tbody>
+      </table>
+</body>
+</html>
